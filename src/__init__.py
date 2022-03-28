@@ -19,10 +19,17 @@ def seed():
     """
     return [
         Page(
-            Label("Hello, world!")
+            name_input:= Input(
+                "What's your name?",
+                variable="name"
+            )
         ),
         Page(
-            Label("Goodbye, world!"),
+            Label(compile=partial(greet_user, name_input)),
             back=True
         )
     ]
+
+
+def greet_user(greet_label, name_input):
+    greet_label.label = f"Hello, {name_input.response}!"
